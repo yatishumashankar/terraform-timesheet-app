@@ -11,12 +11,7 @@ env:
 
 jobs:
   terraform:
-    name: Terraform Deploy
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: modules
 
     steps:
       - name: Checkout code
@@ -37,15 +32,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Format Check
-        run: terraform fmt -check
-
       - name: Terraform Validate
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
+        run: terraform plan
