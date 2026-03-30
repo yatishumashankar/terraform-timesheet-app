@@ -5,7 +5,7 @@ resource "aws_elastic_beanstalk_application" "app" {
 resource "aws_elastic_beanstalk_environment" "env" {
   name                = "timesheet-env"
   application         = aws_elastic_beanstalk_application.app.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.4.8 running Python 3.8"
+  platform_arn = "arn:aws:elasticbeanstalk:ap-south-1::platform/Python 3.11 running on 64bit Amazon Linux 2"
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
