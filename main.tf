@@ -1,13 +1,22 @@
+# =========================
+# VPC Module
+# =========================
 module "vpc" {
   source = "./modules/vpc"
 }
 
+# =========================
+# Security Group Module
+# =========================
 module "security_group" {
   source = "./modules/security-group"
 
   vpc_id = module.vpc.vpc_id
 }
 
+# =========================
+# Backend (Elastic Beanstalk)
+# =========================
 module "beanstalk" {
   source = "./modules/beanstalk"
 
@@ -15,6 +24,10 @@ module "beanstalk" {
   public_subnet_id  = module.vpc.public_subnet_id
   security_group_id = module.security_group.security_group_id
 }
+
+# =========================
+# Database (RDS)
+# =========================
 module "rds" {
   source = "./modules/rds"
 
@@ -22,8 +35,11 @@ module "rds" {
   security_group_id = module.security_group.security_group_id
 }
 
+# =========================
+# Frontend (S3)
+# =========================
 module "frontend" {
   source = "./modules/frontend"
 
-  bucket_name = "timesheet-frontend-yatish-12345"
+  bucket_name = var.bucket_name
 }
