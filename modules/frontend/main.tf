@@ -1,26 +1,12 @@
 # -------------------------------
-# S3 BUCKET
+# S3 BUCKET (PRIVATE)
 # -------------------------------
 resource "aws_s3_bucket" "frontend_bucket" {
   bucket = var.bucket_name
 
   tags = {
-    Name = "Frontend Bucket"
-  }
-}
-
-# -------------------------------
-# S3 WEBSITE CONFIG (for React routing)
-# -------------------------------
-resource "aws_s3_bucket_website_configuration" "frontend" {
-  bucket = aws_s3_bucket.frontend_bucket.id
-
-  index_document {
-    suffix = "index.html"
-  }
-
-  error_document {
-    key = "index.html"
+    Name    = "Frontend Bucket"
+    Project = "timesheet-app"
   }
 }
 
@@ -68,12 +54,7 @@ resource "aws_cloudfront_distribution" "frontend_cdn" {
     allowed_methods = ["GET", "HEAD"]
     cached_methods  = ["GET", "HEAD"]
 
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
   }
 
   viewer_certificate {
@@ -84,6 +65,10 @@ resource "aws_cloudfront_distribution" "frontend_cdn" {
     geo_restriction {
       restriction_type = "none"
     }
+  }
+
+  tags = {
+    Project = "timesheet-app"
   }
 }
 
