@@ -31,7 +31,7 @@ module "beanstalk" {
 module "rds" {
   source = "./modules/rds"
 
-  private_subnet_id = module.vpc.private_subnet_id
+  private_subnet_ids = module.vpc.private_subnet_ids
   security_group_id = module.security_group.security_group_id
 }
 
