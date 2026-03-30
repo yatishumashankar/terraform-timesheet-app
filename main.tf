@@ -41,5 +41,5 @@ module "rds" {
 module "frontend" {
   source = "./modules/frontend"
 
-  bucket_name = var.bucket_name
+  bucket_name = "timesheet-frontend-yatish-12345"
 }
