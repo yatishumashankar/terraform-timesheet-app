@@ -1,16 +1,10 @@
-name: Terraform CI/CD
+name: Terraform Destroy
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-
-env:
-  TF_VERSION: 1.6.0
+  workflow_dispatch:
 
 jobs:
-  terraform:
+  destroy:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +13,6 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ env.TF_VERSION }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -32,16 +24,6 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Format Check
-        run: terraform fmt -check
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-      # 🔒 Apply only on main branch
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
+        
