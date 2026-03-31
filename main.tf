@@ -1,4 +1,10 @@
-# =========================
+terraform {
+  backend "s3" {
+    bucket = "yatish-terraform-state-bucket-123"
+    key    = "timesheet/terraform.tfstate"
+    region = "ap-south-1"
+  }
+}# =========================
 # VPC Module
 # =========================
 module "vpc" {
