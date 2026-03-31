@@ -1,6 +1,6 @@
-variable "private_subnet_id" {
-  description = "Private subnet ID for RDS"
-  type        = string
+variable "private_subnet_ids" {
+  description = "List of Private Subnet IDs for RDS"
+  type        = list(string)
 }
 
 variable "security_group_id" {
