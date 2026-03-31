@@ -26,7 +26,7 @@ resource "aws_s3_bucket_public_access_block" "frontend" {
 # CLOUDFRONT OAC (SECURE ACCESS)
 # -------------------------------
 resource "aws_cloudfront_origin_access_control" "frontend_oac" {
-  name                              = "frontend-oac"
+  name                              = "frontend-oac-98765"
   description                       = "OAC for frontend S3"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"

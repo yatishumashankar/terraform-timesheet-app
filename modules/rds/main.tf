@@ -1,9 +1,9 @@
 resource "aws_db_subnet_group" "db_subnet" {
-  name       = "timesheet-db-subnet-group"
+  name       = "timesheet-db-subnet-group-12345"
   subnet_ids = var.private_subnet_ids
 
   tags = {
-    Name = "timesheet-db-subnet-group"
+    Name = "timesheet-db-subnet-group-12345"
   }
 }
 
